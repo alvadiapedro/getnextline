@@ -12,7 +12,32 @@
 
 #include "get_next_line.h"
 
-char *get_next_line(int fd)
+char	*line_ret(char **str, int bytes)
+{
+	int	new_line;
+	char	*line;
+	char	*temp;
+
+	if (*str == NULL || bytes == -1)
+	    return (NULL);
+	new_line = get_new_line(*str);
+	if (new_line != -1)
+	{
+		line = ft_substr(*str, 0, new_line);
+		temp = ft_substr(*str, new_line + 1, ft_strlen(*str));
+		free(*str);
+		*str = temp;
+		if (**str != '\0')
+		    return (line);
+	}
+	else
+	    line = ft_strdup(*str);
+	free(*str);
+	*str = NULL;
+	return (line);
+}
+
+char	*get_next_line(int fd)
 {
 	int			bytes;
 	char		storage[BUFFER_SIZE + 1];
@@ -26,13 +51,27 @@ char *get_next_line(int fd)
 	{
 		storage[bytes] = '\0';
 		if (str[fd] == NULL)
-			s[fd] = ft_strdup("");
+			str[fd] = ft_strdup("");
 		temp = ft_strjoin(str[fd], storage);
 		free(str[fd]);
 		str[fd] = temp;
-		if (new_line(s[fd]) != -1)
+		if (get_new_line(str[fd]) != -1)
 			break ;
 		bytes = read(fd, storage, BUFFER_SIZE);
 	}
-	return (line_ret(&s[fd], bytes));
+	return (line_ret(&str[fd], bytes));
+}
+
+int main()
+{
+ 	int fd;
+ 	char *line;
+ 	fd = open("test.txt", O_RDONLY);
+ 	while (1)
+ 	{
+ 		line = get_next_line (fd);
+ 		if (line == NULL)
+ 			break ;
+ 		printf("%s" , line);
+ 	}
 }

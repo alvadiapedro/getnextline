@@ -6,7 +6,7 @@
 /*   By: pmiranda <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 14:55:37 by pmiranda          #+#    #+#             */
-/*   Updated: 2022/03/17 15:48:24 by pmiranda         ###   ########.fr       */
+/*   Updated: 2022/03/17 16:53:06 by pmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ int	get_new_line(char *str)
 	int	nl;
 
 	if (!str)
-	    return (-1);
+		return (-1);
 	nl = 0;
 	while (str[nl] != '\0')
 	{
 		if (str[nl] == '\n')
-		    return (nl);
+			return (nl);
 		nl++;
 	}
 	return (-1);

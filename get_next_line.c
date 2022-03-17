@@ -6,7 +6,7 @@
 /*   By: pmiranda <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 14:55:15 by pmiranda          #+#    #+#             */
-/*   Updated: 2022/03/17 15:32:54 by pmiranda         ###   ########.fr       */
+/*   Updated: 2022/03/17 16:47:38 by pmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 char	*line_ret(char **str, int bytes)
 {
-	int	nl;
+	int		nl;
 	char	*line;
 	char	*temp;
 
 	if (*str == NULL || bytes == -1)
-	    return (NULL);
+		return (NULL);
 	nl = get_new_line(*str);
 	if (nl != -1)
 	{
@@ -28,10 +28,10 @@ char	*line_ret(char **str, int bytes)
 		free(*str);
 		*str = temp;
 		if (**str != '\0')
-		    return (line);
+			return (line);
 	}
 	else
-	    line = ft_strdup(*str);
+		line = ft_strdup(*str);
 	free(*str);
 	*str = NULL;
 	return (line);

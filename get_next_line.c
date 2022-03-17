@@ -6,7 +6,7 @@
 /*   By: pmiranda <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 14:55:15 by pmiranda          #+#    #+#             */
-/*   Updated: 2022/03/17 15:13:13 by pmiranda         ###   ########.fr       */
+/*   Updated: 2022/03/17 15:32:54 by pmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 char	*line_ret(char **str, int bytes)
 {
-	int	new_line;
+	int	nl;
 	char	*line;
 	char	*temp;
 
 	if (*str == NULL || bytes == -1)
 	    return (NULL);
-	new_line = get_new_line(*str);
-	if (new_line != -1)
+	nl = get_new_line(*str);
+	if (nl != -1)
 	{
-		line = ft_substr(*str, 0, new_line);
-		temp = ft_substr(*str, new_line + 1, ft_strlen(*str));
+		line = ft_substr(*str, 0, nl);
+		temp = ft_substr(*str, nl + 1, ft_strlen(*str));
 		free(*str);
 		*str = temp;
 		if (**str != '\0')

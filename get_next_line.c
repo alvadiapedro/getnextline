@@ -6,7 +6,7 @@
 /*   By: pmiranda <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 14:55:15 by pmiranda          #+#    #+#             */
-/*   Updated: 2022/03/23 16:37:59 by pmiranda         ###   ########.fr       */
+/*   Updated: 2022/03/23 17:44:31 by pmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,14 @@ char	*line_ret(char **str, int bytes)
 	if (*str == NULL || bytes == -1)
 		return (NULL);
 	nl = get_new_line(*str);
+	//printf("str = %s\n", *str);
 	if (nl != -1)
 	{
 		line = ft_substr(*str, 0, nl);
+		printf("line = %s\n", line);
 		temp = ft_substr(*str, nl + 1, ft_strlen(*str));
+		printf("temp = %s\n", temp);
+		printf("str = %s\n", *str);
 		free(*str);
 		*str = temp;
 		if (**str != '\0')
@@ -53,6 +57,7 @@ char	*get_next_line(int fd)
 		//printf("str[fd] = %s\n", str[fd]);
 		if (str[fd] == NULL)
 			str[fd] = ft_strdup("");
+		//printf("str[fd] = %s\n", str[fd]);
 		temp = ft_strjoin(str[fd], storage);
 		//printf("storage = %s\n", storage);
 		//printf("temp = %s\n", temp);
@@ -66,7 +71,7 @@ char	*get_next_line(int fd)
 	return (line_ret(&str[fd], bytes));
 }
 
-/*int main()
+int main()
 {
  	int fd;
  	char *line;
@@ -78,4 +83,4 @@ char	*get_next_line(int fd)
  			break ;
  		printf("%s" , line);
  	}
-}*/
+}

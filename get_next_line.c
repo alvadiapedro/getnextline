@@ -6,7 +6,7 @@
 /*   By: pmiranda <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 14:55:15 by pmiranda          #+#    #+#             */
-/*   Updated: 2022/03/17 16:47:38 by pmiranda         ###   ########.fr       */
+/*   Updated: 2022/03/23 16:37:59 by pmiranda         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,14 +47,18 @@ char	*get_next_line(int fd)
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
 	bytes = read(fd, storage, BUFFER_SIZE);
-	while (bytes < 0)
+	while (bytes > 0)
 	{
 		storage[bytes] = '\0';
+		//printf("str[fd] = %s\n", str[fd]);
 		if (str[fd] == NULL)
 			str[fd] = ft_strdup("");
 		temp = ft_strjoin(str[fd], storage);
+		//printf("storage = %s\n", storage);
+		//printf("temp = %s\n", temp);
 		free(str[fd]);
 		str[fd] = temp;
+		//printf("str[fd] = %s\n", str[fd]);
 		if (get_new_line(str[fd]) != -1)
 			break ;
 		bytes = read(fd, storage, BUFFER_SIZE);
@@ -66,7 +70,7 @@ char	*get_next_line(int fd)
 {
  	int fd;
  	char *line;
- 	fd = open("test.txt", O_RDONLY);
+ 	fd = open("text.txt", O_RDONLY);
  	while (1)
  	{
  		line = get_next_line (fd);
